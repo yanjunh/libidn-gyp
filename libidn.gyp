@@ -58,7 +58,14 @@
           'sources': [
             'lib/gl/strverscmp.c',
           ],
-        }, {
+        }],
+        ['OS == "linux"', {
+          'defines': [
+            'LOCALEDIR=\"$(localedir)\"',
+          ],
+          'include_dirs': [
+            '<(DEPTH)/third_party/libidn/linux/include',
+          ],
           'sources': [
             'gl/progname.c',
             'gl/unistd.c',
