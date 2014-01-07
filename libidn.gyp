@@ -58,23 +58,39 @@
           'sources': [
             'lib/gl/strverscmp.c',
           ],
-        }],
-        ['OS == "linux"', {
+        }, {
           'defines': [
             'LOCALEDIR=\"$(localedir)\"',
           ],
           'include_dirs': [
-            '<(DEPTH)/third_party/libidn/linux/include',
+            '<(DEPTH)/third_party/libidn/<(OS)/include',
           ],
           'sources': [
             'gl/progname.c',
             'gl/unistd.c',
-            'gl/version-etc.c',
             'lib/gl/unistr/u8-mbtoucr.c',
             'lib/gl/unistr/u8-uctomb.c',
             'lib/gl/unistr/u8-uctomb-aux.c',
           ]
-        }]
+        }],
+        ['OS == "mac"', {
+          'include_dirs': [
+            '<(DEPTH)/third_party/libidn/gl',
+          ],
+          'direct_dependent_settings': {
+            'include_dirs': [
+              '<(DEPTH)/third_party/libidn/mac/include',
+            ],
+          },
+          'sources': [
+            'lib/gl/strverscmp.c',
+          ],
+          'link_settings': {
+            'libraries': [
+              '$(SDKROOT)/usr/lib/libiconv.dylib',
+            ],
+          },
+        }],
       ],  
     },
   ],
